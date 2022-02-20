@@ -17,26 +17,26 @@ namespace Simplex.Migrations
 
         protected override void Seed(Simplex.Models.ApplicationDbContext context)
         {
-            var userStore = new UserStore<ApplicationUser>(context);
-            var userManager= new UserManager<ApplicationUser>(userStore);
+            //var userStore = new UserStore<ApplicationUser>(context);
+            //var userManager= new UserManager<ApplicationUser>(userStore);
 
-            if (!context.Users.Any(u => u.UserName == "admin@simplexB.com"))
-            {
-                var user = new ApplicationUser
-                {
-                    UserName = "admin@simplexB.com",
-                    Email = "admin@simplexB.com"
-                };
-                userManager.Create(user,"p@ssw0rD");
+            //if (!context.Users.Any(u => u.UserName == "admin@simplexB.com"))
+            //{
+            //    var user = new ApplicationUser
+            //    {
+            //        UserName = "admin@simplexB.com",
+            //        Email = "admin@simplexB.com"
+            //    };
+            //    userManager.Create(user,"p@ssw0rD");
 
-                var adminCustomer = new Customer { Name = "Admin", Id = Convert.ToInt32(user.Id) };
+            //    var adminCustomer = new Customer { Name = "Admin", Id = Convert.ToInt32(user.Id) };
 
-                context.Roles.AddOrUpdate(r=>r.Name, new IdentityRole {Name="CanManageCustomers"});
+            //    context.Roles.AddOrUpdate(r=>r.Name, new IdentityRole {Name="CanManageCustomers"});
 
-                context.SaveChanges();
+            //    context.SaveChanges();
 
-                userManager.AddToRole(user.Id, "CanManageCustomers");
-            }
+            //    userManager.AddToRole(user.Id, "CanManageCustomers");
+            //}
 
             //  This method will be called after migrating to the latest version.
 

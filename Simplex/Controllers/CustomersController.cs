@@ -26,7 +26,11 @@ namespace Simplex.Controllers
         public ActionResult Index()
         {
             var customers=_context.Customers.ToList();
-            return View("Index",customers);
+
+            if (User.IsInRole("CanManageCustomer"))
+            return View("IndexAdmin",customers);
+
+            return View("Index", customers);
         }
 
         public ActionResult Create()
