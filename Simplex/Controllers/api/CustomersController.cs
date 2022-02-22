@@ -27,11 +27,9 @@ namespace Simplex.Controllers.api
         // GET: api/Customers
         public IHttpActionResult GetCustomers()
         {
-            var customers = _context.Customers.ToList();
+            var customersDto = _context.Customers.ToList().Select(Mapper.Map<Customer,CustomerDto>);
 
-            var customersDto=Mapper.Map<Customer, CustomerDto>(customers);
-
-            if (customers!=null)
+            if (customersDto!=null)
                 return Ok(customersDto);
             return NotFound();
 
@@ -41,10 +39,10 @@ namespace Simplex.Controllers.api
         public IHttpActionResult GetCustomer(int id)
         {
             var customer = _context.Customers.Single(c => c.Id == id);
-
+            var customerDto=Mapper.Map<CustomerDto>(customer);
             if (customer == null)
                 return NotFound();
-            return Ok(customer);
+            return Ok(customerDto);
             
 
         }
